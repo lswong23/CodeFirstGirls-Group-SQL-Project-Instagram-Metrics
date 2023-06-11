@@ -1,7 +1,7 @@
 # CFG_SQL_project
 This is the final project that forms part of the CodeFirstGirls Data & SQL course. This repository contains the SQL project for analyzing Instagram data. The project involves creating a relational database, writing SQL queries, and implementing advanced features such as stored procedures, triggers, events, and views.
-## Project name: Instragram Metrics
-The purpose of this project is to analyze user engagement and content trends on Instagram.
+## Project name: Instragram Metrics for Pistachio Smootie
+The purpose of this project is to analyze user engagement and content trends on Instagram for product campaign (Pistachio Smoothie).
 ## Table of Contents
 - TBC: [Database Schema](#database-schema)
 - [SQL Scripts](#sql-scripts)
