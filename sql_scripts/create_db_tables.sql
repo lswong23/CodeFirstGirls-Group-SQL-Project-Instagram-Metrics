@@ -49,3 +49,39 @@ CREATE TABLE likes (
   CONSTRAINT fk_user_likes FOREIGN KEY (user_id) REFERENCES Users(user_id),
   CONSTRAINT fk_post_likes FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );
+
+
+-- Table 5: Hashtags
+CREATE TABLE Hashtags (
+  hashtag_id INT PRIMARY KEY,
+  hashtag_name VARCHAR(50)
+);
+
+-- Table 6: Shares
+CREATE TABLE Shares (
+  share_id INT PRIMARY KEY,
+  post_id INT,
+  user_id INT,
+  share_date DATETIME,
+  FOREIGN KEY (post_id) REFERENCES Posts(post_id),
+  FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+-- Table 7: Sentiment Analysis
+CREATE TABLE SentimentAnalysis (
+  analysis_id INT PRIMARY KEY,
+  post_id INT,
+  sentiment_score DECIMAL(4, 2),
+  analysis_date DATETIME,
+  FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+);
+
+-- Table 8: Campaign Performance
+CREATE TABLE CampaignPerformance (
+  campaign_id INT PRIMARY KEY,
+  campaign_name VARCHAR(50),
+  start_date DATE,
+  end_date DATE,
+  engagement_rate DECIMAL(4, 2),
+  reach INT
+);
