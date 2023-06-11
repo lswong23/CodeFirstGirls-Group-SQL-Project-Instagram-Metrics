@@ -11,8 +11,7 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL,
   full_name VARCHAR(35),
   date_of_birth DATE,
-  profile_picture_url VARCHAR(255),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  profile_picture_url VARCHAR(255)
 );
 
 -- table 2: Instagram Posts table
