@@ -187,7 +187,7 @@ VALUES
   (9, 9, 0.73, '2023-06-02 12:45:00'),
   (10, 10, 0.62, '2023-06-07 1:45:00');
   
--- Insert data into SentimentAnalysis table
+-- Insert data into CampaignPerformance table
 INSERT INTO CampaignPerformance (campaign_id, campaign_name, start_date, end_date, engagement_rate, reach)
 VALUES
   (1, 'Pistachio Orange', '2023-05-01', '2023-05-31', 0.12, 25000),
