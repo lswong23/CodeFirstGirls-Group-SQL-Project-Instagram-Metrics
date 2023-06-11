@@ -145,5 +145,59 @@ VALUES
   (2110609, 510, 110605, 'Beautiful photo!', CURRENT_TIMESTAMP);
   
 
+-- Insert data into Hashtags table
+INSERT INTO Hashtags (hashtag_id, hashtag_name)
+VALUES
+  (1, '#smoothielove'),
+  (2, '#healthychoices'),
+  (3, '#pistaccioorange'),
+  (4, '#refreshing'),
+  (5, '#smoothiebowl'),
+  (6, '#fruitful'),
+  (7, '#summerdrinks'),
+  (8, '#nuttygoodness'),
+  (9, '#juiceitup'),
+  (10, '#tropicalvibes');
 
+-- Insert data into Shares table
+INSERT INTO Shares (share_id, post_id, user_id, share_date)
+VALUES
+  (1, 1, 101, '2023-05-10 09:30:00'),
+  (2, 2, 102, '2023-05-12 15:45:00'),
+  (3, 3, 103, '2023-05-15 11:20:00'),
+  (4, 4, 104, '2023-05-18 17:55:00'),
+  (5, 5, 105, '2023-05-21 08:10:00'),
+  (6, 6, 106, '2023-05-24 14:30:00'),
+  (7, 7, 107, '2023-05-27 10:45:00'),
+  (8, 8, 108, '2023-05-30 16:20:00'),
+  (9, 9, 109, '2023-06-02 12:35:00'),
+  (10, 10, 110, '2023-06-05 09:50:00');
+
+-- Insert data into SentimentAnalysis table
+INSERT INTO SentimentAnalysis (analysis_id, post_id, sentiment_score, analysis_date)
+VALUES
+  (1, 1, 0.85, '2023-05-10 10:00:00'),
+  (2, 2, 0.92, '2023-05-12 16:00:00'),
+  (3, 3, 0.78, '2023-05-15 12:00:00'),
+  (4, 4, 0.64, '2023-05-18 18:00:00'),
+  (5, 5, 0.88, '2023-05-21 08:30:00'),
+  (6, 6, 0.76, '2023-05-24 14:45:00'),
+  (7, 7, 0.91, '2023-05-27 11:00:00'),
+  (8, 8, 0.82, '2023-05-30 16:30:00'),
+  (9, 9, 0.73, '2023-06-02 12:45:00'),
+  (10, 10, 0.62, '2023-06-07 1:45:00');
+  
+-- Insert data into SentimentAnalysis table
+INSERT INTO CampaignPerformance (campaign_id, campaign_name, start_date, end_date, engagement_rate, reach)
+VALUES
+  (1, 'Pistachio Orange', '2023-05-01', '2023-05-31', 0.12, 25000),
+  (2, 'Citrus Burst', '2023-06-01', '2023-06-30', 0.11, 28000),
+  (3, 'Nutty Delight', '2023-07-01', '2023-07-31', 0.15, 32000),
+  (4, 'Orange Dream', '2023-08-01', '2023-08-31', 0.13, 27000),
+  (5, 'Tropical Fusion', '2023-09-01', '2023-09-30', 0.09, 19000),
+  (6, 'Creamy Pistachio', '2023-10-01', '2023-10-31', 0.14, 30000),
+  (7, 'Zesty Orange', '2023-11-01', '2023-11-30', 0.11, 25000),
+  (8, 'Nutty Citrus', '2023-12-01', '2023-12-31', 0.13, 28000),
+  (9, 'Refreshing Twist', '2024-01-01', '2024-01-31', 0.12, 26000),
+  (10, 'Creamsicle Surprise', '2024-02-01', '2024-02-29', 0.1, 23000);
 
