@@ -3,7 +3,7 @@ This is the final project that forms part of the CodeFirstGirls Data & SQL cours
 ## Project name: Instragram Metrics
 The purpose of this project is to analyze user engagement and content trends on Instagram.
 ## Table of Contents
-- [Database Schema](#database-schema)
+- TBC: [Database Schema](#database-schema)
 - [SQL Scripts](#sql-scripts)
 - TBC: [Stored Procedures](#stored-procedures)
 - TBC: [Triggers](#triggers)
