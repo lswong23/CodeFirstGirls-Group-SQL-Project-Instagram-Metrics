@@ -84,3 +84,66 @@ CREATE TABLE CampaignPerformance (
   engagement_rate DECIMAL(4, 2),
   reach INT
 );
+
+
+----------------------------------------------------------------------------------------------------
+Populate table
+------------------------------------------------------------------------------------------------------
+-- insert data into users table
+INSERT INTO users (user_id, username, email, password, full_name, date_of_birth, profile_picture_url)
+VALUES
+  (501, 'john_doe', 'john@example.com', 'password123', 'John Doe', '1990-05-15', '/profiles/john_doe.jpg'),
+  (502, 'jane_smith', 'jane@example.com', 'password456', 'Jane Smith', '1992-09-21', '/profiles/jane_smith.jpg'),
+  (503, 'david_lee', 'david@example.com', 'password789', 'David Lee', '1988-12-02', '/profiles/david_lee.jpg'),
+  (504, 'maria_garcia', 'maria@example.com', 'password123', 'Maria Garcia', '1995-07-09', '/profiles/maria_garcia.jpg'),
+  (505, 'ava_thompson', 'ava@example.com', 'password123', 'Ava Thompson', '1997-12-30', '/profiles/ava_thompson.jpg'),
+  (506, 'sofia_rossi', 'sofia@example.com', 'password789', 'Sofia Rossi', '1987-04-18', '/profiles/sofia_rossi.jpg'),
+  (507, 'daniel_nguyen', 'daniel@example.com', 'password123', 'Daniel Nguyen', '1994-08-07', '/profiles/daniel_nguyen.jpg'),
+  (508, 'liam_jackson', 'liam@example.com', 'password789', 'Liam Jackson', '1989-09-09', '/profiles/liam_jackson.jpg'),
+  (509, 'miguel_santos', 'miguel@example.com', 'password789', 'Miguel Santos', '1992-08-29', '/profiles/miguel_santos.jpg'),
+  (510, 'laura_russo', 'laura@example.com', 'password123', 'Laura Russo', '1996-02-03', '/profiles/laura_russo.jpg');
+
+
+-- insert data into posts table
+
+INSERT INTO posts (post_id, user_id, caption, image_url, location, created_at)
+VALUES
+ (110601, 501, 'Enjoying a refreshing Pistachio Orange Smoothie!', '/photos/smoothie1.jpg', 'Paris', CURRENT_TIMESTAMP),
+  (110602, 502, 'Starting my day with a nutritious Pistachio Orange Smoothie!', '/photos/smoothie2.jpg', 'London', CURRENT_TIMESTAMP),
+  (110603, 503, 'Sipping on a delicious Pistachio Orange Smoothie in Barcelona!', '/photos/smoothie3.jpg', 'Barcelona', CURRENT_TIMESTAMP),
+  (110604, 504, 'Pistachio Orange Smoothie to beat the summer heat!', '/photos/smoothie4.jpg', 'Berlin', CURRENT_TIMESTAMP),
+  (110605, 505, 'Exploring Copenhagen with a refreshing Pistachio Orange Smoothie!', '/photos/smoothie5.jpg', 'Copenhagen', CURRENT_TIMESTAMP),
+  (110606, 506, 'Pistachio orange smoothie for a quick energy boost!', '/photos/smoothie6.jpg', 'Barcelona', CURRENT_TIMESTAMP),
+  (110607, 507, 'Pistachio orange is the new taste!', '/photos/smoothie7.jpg', 'Copenhagen', CURRENT_TIMESTAMP),
+  (110608, 508, 'Not sure about the name but certainly like the flavour', '/photos/smoothie8.jpg', 'Paris', CURRENT_TIMESTAMP),
+  (110609, 509, 'Never thought this combo will work, but it does!', '/photos/smoothie9.jpg', 'London', CURRENT_TIMESTAMP),
+  (110610, 510, 'yummy?', '/photos/smoothie10.jpg', 'Berlin', CURRENT_TIMESTAMP);
+  
+ 
+-- insert data into likes table
+
+INSERT INTO likes (like_id, user_id, post_id, created_at)
+VALUES
+  (1, 506, 110601, CURRENT_TIMESTAMP),
+  (2, 507, 110602, CURRENT_TIMESTAMP),
+  (3, 508, 110603, CURRENT_TIMESTAMP),
+  (4, 509, 110604, CURRENT_TIMESTAMP),
+  (5, 501, 110605, CURRENT_TIMESTAMP);
+  
+-- into data into comments table
+
+INSERT INTO comments (comment_id, user_id, post_id, comment_text, created_at)
+VALUES
+  (2110601, 502, 110601, 'Looks delicious!', CURRENT_TIMESTAMP),
+  (2110602, 503, 110601, 'I need to try this!', CURRENT_TIMESTAMP),
+  (2110603, 504, 110602, 'Perfect way to start the day!', CURRENT_TIMESTAMP),
+  (2110604, 505, 110602, 'Love the color!', CURRENT_TIMESTAMP),
+  (2110605, 506, 110610, 'Great flavor combination!', CURRENT_TIMESTAMP),
+  (2110606, 507, 110610, 'I am dubious about the taste', CURRENT_TIMESTAMP),
+  (2110607, 508, 110607, 'Refreshing!', CURRENT_TIMESTAMP),
+  (2110608, 509, 110604, 'I want one now!', CURRENT_TIMESTAMP),
+  (2110609, 510, 110605, 'Beautiful photo!', CURRENT_TIMESTAMP);
+  
+
+
+
