@@ -4,7 +4,7 @@ USE instagram_metrics;
 -- 1. Create Instagram metric and product tables (with primary and foreign key)
 
 -- table 1: Instagram Users
-CREATE TABLE users (
+CREATE TABLE Users (
   user_id INT PRIMARY KEY,
   username VARCHAR(30) NOT NULL,
   email VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE users (
 
 -- table 2: Instagram Posts table
   
-  CREATE TABLE posts (
+  CREATE TABLE Posts (
   post_id INT PRIMARY KEY,
   user_id INT,
   caption TEXT,
@@ -28,7 +28,7 @@ CREATE TABLE users (
 
 -- table 3: Instagram post's comments
 
-CREATE TABLE comments (
+CREATE TABLE Comments (
   comment_id INT PRIMARY KEY,
   user_id INT,
   post_id INT,
@@ -40,7 +40,7 @@ CREATE TABLE comments (
 
 -- table 4 Instagra post's likes
 
-CREATE TABLE likes (
+CREATE TABLE Likes (
   like_id INT PRIMARY KEY,
   user_id INT,
   post_id INT,
