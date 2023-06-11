@@ -17,7 +17,7 @@ CREATE TABLE users (
 
 -- table 2: Instagram Posts table
   
-  CREATE TABLE Posts (
+  CREATE TABLE posts (
   post_id INT PRIMARY KEY,
   user_id INT,
   caption TEXT,
@@ -29,7 +29,7 @@ CREATE TABLE users (
 
 -- table 3: Instagram post's comments
 
-CREATE TABLE Comments (
+CREATE TABLE comments (
   comment_id INT PRIMARY KEY,
   user_id INT,
   post_id INT,
@@ -41,7 +41,7 @@ CREATE TABLE Comments (
 
 -- table 4 Instagra post's likes
 
-CREATE TABLE Likes (
+CREATE TABLE likes (
   like_id INT PRIMARY KEY,
   user_id INT,
   post_id INT,
