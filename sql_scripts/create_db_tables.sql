@@ -1,8 +1,8 @@
-CREATE DATABASE NEWSMOOTHIE;
+CREATE DATABASE newsmoothie;
 
 USE NEWSMOOTHIE;
 
-CREATE TABLE users (
+CREATE TABLE Users (
     user_id INT PRIMARY KEY,
     username VARCHAR(255) UNIQUE,
     full_name VARCHAR(255),
@@ -100,6 +100,7 @@ VALUES
     (8, 571, 107671, 'Freshness in every sip', '2023-05-27 15:35:00'),
     (9, 583, 108320, 'Happiness in a glass!', '2023-05-28 13:30:00'),
     (10, 697, 108101, 'Reminds me of a tropical getaway', '2023-05-29 13:30:00');
+    
 INSERT INTO Likes (like_id, user_id, post_id, post_likes, time_created)
 VALUES
     (1, 531, 106872, 56, '2023-05-20 10:40:00'),
@@ -112,6 +113,7 @@ VALUES
     (8, 571, 107671, 42, '2023-05-26 12:00:00'),
     (9, 583, 108320, 75, '2023-05-27 15:40:00'),
     (10, 697, 108101, 27, '2023-05-28 13:35:00');
+    
 INSERT INTO Hashtags (hashtag_id, hashtag)
 VALUES
     (1, '#pistachioorange'),
@@ -124,6 +126,7 @@ VALUES
     (8, '#energizing'),
     (9, '#fruitygoodness'),
     (10, '#healthyliving');
+    
 INSERT INTO Shares (share_id, post_id, user_id, post_shares, share_date, reach)
 VALUES
     (1, 106872, 531, 28, '2023-05-20 12:00:00', 145),
@@ -136,6 +139,7 @@ VALUES
     (8, 107671, 571, 19, '2023-05-27 15:50:00', 110),
     (9, 108320, 583, 32, '2023-05-28 13:40:00', 178),
     (10, 108101, 697, 9, '2023-05-29 19:00:00', 58);
+    
 INSERT INTO SentimentAnalysis (comment_id, sentiment_score)
 VALUES
     (1, 1),
@@ -148,6 +152,7 @@ VALUES
     (8, 1),
     (9, 1),
     (10, 1);
+    
 INSERT INTO Impressions (impression_id, post_id, user_id, impression_date, impressions_total)
 VALUES
     (1, 106872, 531, '2023-06-01 10:30:00', 500),
@@ -160,3 +165,54 @@ VALUES
     (8, 107671, 571, '2023-06-03 09:45:00', 950),
     (9, 108320, 583, '2023-06-03 12:00:00', 700),
     (10, 108101, 697, '2023-06-03 15:30:00', 850);
+    
+--  join these two tables: comments  with sentimentalanalysis
+
+SELECT c.comment_id, c.user_id, c.post_id, c.comment, c.time_created, sa.sentiment_score
+FROM Comments AS c
+JOIN SentimentAnalysis AS sa ON c.comment_id = sa.comment_id;
+
+-- To create a view that combines multiple tables that allows the marketing manager to see posts, comments and users in One table
+
+CREATE VIEW post_details AS
+SELECT p.post_id, p.caption, u.username, c.comment
+FROM posts p
+JOIN users u ON p.user_id = u.user_id
+JOIN comments c ON p.post_id = c.post_id;
+
+Select *
+FROM post_details;
+
+
+
+-- creating a stored function that calculates Total Engagement for a Post. This function calculates the total engagement (likes + comments) for a given post ID.
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+DELIMITER //
+
+CREATE FUNCTION GetSentimentLabel(sentimentScore INT) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE sentimentLabel VARCHAR(255);
+    
+    IF sentimentScore >= 0.7 THEN
+        SET sentimentLabel = 'Positive';
+    ELSEIF sentimentScore <= 0.3 THEN
+        SET sentimentLabel = 'Negative';
+    ELSE
+        SET sentimentLabel = 'Neutral';
+    END IF;
+    
+    RETURN sentimentLabel;
+END //
+
+DELIMITER ;
+
+
+-- Create a query with a subquery that retrieves all posts with their respective comments
+
+SELECT p.post_id, p.caption, (
+    SELECT COUNT(*) 
+    FROM comments c 
+    WHERE c.post_id = p.post_id
+) AS comment_count
+FROM posts p;
