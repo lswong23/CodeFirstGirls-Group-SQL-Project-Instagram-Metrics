@@ -1,203 +1,162 @@
-CREATE DATABASE instagram_metrics;
-USE instagram_metrics;
+CREATE DATABASE NEWSMOOTHIE;
 
--- 1. Create Instagram metric and product tables (with primary and foreign key)
+USE NEWSMOOTHIE;
 
--- table 1: Instagram Users
-CREATE TABLE Users (
-  user_id INT PRIMARY KEY,
-  username VARCHAR(30) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  full_name VARCHAR(35),
-  date_of_birth DATE,
-  profile_picture_url VARCHAR(255)
+CREATE TABLE users (
+    user_id INT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE,
+    full_name VARCHAR(255),
+    email_address VARCHAR(255),
+    location VARCHAR(255)
 );
-
--- table 2: Instagram Posts table
-  
-  CREATE TABLE Posts (
-  post_id INT PRIMARY KEY,
-  user_id INT,
-  caption TEXT,
-  image_url VARCHAR(255),
-  location VARCHAR(255),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_user_posts FOREIGN KEY (user_id) REFERENCES Users(user_id)
+CREATE TABLE Posts (
+    post_id INT PRIMARY KEY,
+    user_id INT,
+    caption TEXT,
+    post_url VARCHAR(255),
+    location VARCHAR(255),
+    time_created DATETIME,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
-
--- table 3: Instagram post's comments
-
 CREATE TABLE Comments (
-  comment_id INT PRIMARY KEY,
-  user_id INT,
-  post_id INT,
-  comment_text TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_user_comments FOREIGN KEY (user_id) REFERENCES Users(user_id),
-  CONSTRAINT fk_post_comments FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+    comment_id INT PRIMARY KEY,
+    user_id INT,
+    post_id INT,
+    comment TEXT,
+    time_created DATETIME,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );
-
--- table 4 Instagra post's likes
-
 CREATE TABLE Likes (
-  like_id INT PRIMARY KEY,
-  user_id INT,
-  post_id INT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_user_likes FOREIGN KEY (user_id) REFERENCES Users(user_id),
-  CONSTRAINT fk_post_likes FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+    like_id INT PRIMARY KEY,
+    user_id INT,
+    post_id INT,
+    post_likes INT,
+    time_created DATETIME,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id)
 );
-
-
--- Table 5: Hashtags
 CREATE TABLE Hashtags (
-  hashtag_id INT PRIMARY KEY,
-  hashtag_name VARCHAR(50)
+    hashtag_id INT PRIMARY KEY,
+    hashtag VARCHAR(255)
 );
-
--- Table 6: Shares
 CREATE TABLE Shares (
-  share_id INT PRIMARY KEY,
-  post_id INT,
-  user_id INT,
-  share_date DATETIME,
-  FOREIGN KEY (post_id) REFERENCES Posts(post_id),
-  FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    share_id INT PRIMARY KEY,
+    post_id INT,
+    user_id INT,
+    post_shares INT,
+    share_date DATETIME,
+    reach INT,
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
-
--- Table 7: Sentiment Analysis
 CREATE TABLE SentimentAnalysis (
-  analysis_id INT PRIMARY KEY,
-  post_id INT,
-  sentiment_score DECIMAL(4, 2),
-  analysis_date DATETIME,
-  FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+    comment_id INT PRIMARY KEY,
+    sentiment_score INT
 );
-
--- Table 8: Campaign Performance
-CREATE TABLE CampaignPerformance (
-  campaign_id INT PRIMARY KEY,
-  campaign_name VARCHAR(50),
-  start_date DATE,
-  end_date DATE,
-  engagement_rate DECIMAL(4, 2),
-  reach INT
+CREATE TABLE Impressions (
+    impression_id INT PRIMARY KEY,
+    post_id INT,
+    user_id INT,
+    impression_date DATETIME,
+    impressions_total INT,
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
-
-
-----------------------------------------------------------------------------------------------------
-Populate table
-------------------------------------------------------------------------------------------------------
--- insert data into users table
-INSERT INTO users (user_id, username, email, password, full_name, date_of_birth, profile_picture_url)
+-- INSERTING DATA INTO TABLES
+INSERT INTO Users (user_id, username, full_name, email_address, location)
 VALUES
-  (501, 'john_doe', 'john@example.com', 'password123', 'John Doe', '1990-05-15', '/profiles/john_doe.jpg'),
-  (502, 'jane_smith', 'jane@example.com', 'password456', 'Jane Smith', '1992-09-21', '/profiles/jane_smith.jpg'),
-  (503, 'david_lee', 'david@example.com', 'password789', 'David Lee', '1988-12-02', '/profiles/david_lee.jpg'),
-  (504, 'maria_garcia', 'maria@example.com', 'password123', 'Maria Garcia', '1995-07-09', '/profiles/maria_garcia.jpg'),
-  (505, 'ava_thompson', 'ava@example.com', 'password123', 'Ava Thompson', '1997-12-30', '/profiles/ava_thompson.jpg'),
-  (506, 'sofia_rossi', 'sofia@example.com', 'password789', 'Sofia Rossi', '1987-04-18', '/profiles/sofia_rossi.jpg'),
-  (507, 'daniel_nguyen', 'daniel@example.com', 'password123', 'Daniel Nguyen', '1994-08-07', '/profiles/daniel_nguyen.jpg'),
-  (508, 'liam_jackson', 'liam@example.com', 'password789', 'Liam Jackson', '1989-09-09', '/profiles/liam_jackson.jpg'),
-  (509, 'miguel_santos', 'miguel@example.com', 'password789', 'Miguel Santos', '1992-08-29', '/profiles/miguel_santos.jpg'),
-  (510, 'laura_russo', 'laura@example.com', 'password123', 'Laura Russo', '1996-02-03', '/profiles/laura_russo.jpg');
-
-
--- insert data into posts table
-
-INSERT INTO posts (post_id, user_id, caption, image_url, location, created_at)
+    (531, 'smoothielover', 'John Doe', 'john.doe@example.com', 'London'),
+    (562, 'healthgirlie', 'Jane Smith', 'jane.smith@example.com', 'Manchester'),
+    (620, 'fitnessjunkie', 'David Johnson', 'david.johnson@example.com', 'Birmingham'),
+    (674, 'wellnessqueen', 'Emma Wilson', 'emma.wilson@example.com', 'Glasgow'),
+    (691, 'energylife', 'James Brown', 'james.brown@example.com', 'Leeds'),
+    (596, 'vitalityboost', 'Sarah Davis', 'sarah.davis@example.com', 'Liverpool'),
+    (666, 'nutritionsquad', 'Michael Taylor', 'michael.taylor@example.com', 'Bristol'),
+    (571, 'freshvibes', 'Olivia Clark', 'olivia.clark@example.com', 'Sheffield'),
+    (583, 'balancedlife', 'Andrew White', 'andrew.white@example.com', 'Cardiff'),
+    (697, 'fitandfab', 'Sophia Lee', 'sophia.lee@example.com', 'Belfast');
+INSERT INTO Posts (post_id, user_id, caption, post_url, location, time_created)
 VALUES
- (110601, 501, 'Enjoying a refreshing Pistachio Orange Smoothie!', '/photos/smoothie1.jpg', 'Paris', CURRENT_TIMESTAMP),
-  (110602, 502, 'Starting my day with a nutritious Pistachio Orange Smoothie!', '/photos/smoothie2.jpg', 'London', CURRENT_TIMESTAMP),
-  (110603, 503, 'Sipping on a delicious Pistachio Orange Smoothie in Barcelona!', '/photos/smoothie3.jpg', 'Barcelona', CURRENT_TIMESTAMP),
-  (110604, 504, 'Pistachio Orange Smoothie to beat the summer heat!', '/photos/smoothie4.jpg', 'Berlin', CURRENT_TIMESTAMP),
-  (110605, 505, 'Exploring Copenhagen with a refreshing Pistachio Orange Smoothie!', '/photos/smoothie5.jpg', 'Copenhagen', CURRENT_TIMESTAMP),
-  (110606, 506, 'Pistachio orange smoothie for a quick energy boost!', '/photos/smoothie6.jpg', 'Barcelona', CURRENT_TIMESTAMP),
-  (110607, 507, 'Pistachio orange is the new taste!', '/photos/smoothie7.jpg', 'Copenhagen', CURRENT_TIMESTAMP),
-  (110608, 508, 'Not sure about the name but certainly like the flavour', '/photos/smoothie8.jpg', 'Paris', CURRENT_TIMESTAMP),
-  (110609, 509, 'Never thought this combo will work, but it does!', '/photos/smoothie9.jpg', 'London', CURRENT_TIMESTAMP),
-  (110610, 510, 'yummy?', '/photos/smoothie10.jpg', 'Berlin', CURRENT_TIMESTAMP);
-  
- 
--- insert data into likes table
-
-INSERT INTO likes (like_id, user_id, post_id, created_at)
+    (106872, 531, 'Enjoying the new flavor!', 'https://instagram.com/p/abc', 'London', '2023-05-20 10:30:00'),
+    (106625, 562, 'Feeling refreshed', 'https://instagram.com/p/def', 'Manchester', '2023-05-21 14:45:00'),
+    (107993, 620, 'The perfect summer treat', 'https://instagram.com/p/ghi', 'Birmingham', '2023-05-22 09:15:00'),
+    (106749, 674, 'Smoothie time!', 'https://instagram.com/p/jkl', 'Glasgow', '2023-05-23 17:20:00'),
+    (107785, 691, 'Healthy and delicious', 'https://instagram.com/p/mno', 'Leeds', '2023-05-24 12:10:00'),
+    (108020, 596, 'Trying something new', 'https://instagram.com/p/pqr', 'Liverpool', '2023-05-25 16:05:00'),
+    (107240, 666, 'Freshness overload', 'https://instagram.com/p/stu', 'Bristol', '2023-05-26 11:50:00'),
+    (107671, 571, 'A sip of happiness', 'https://instagram.com/p/vwx', 'Sheffield', '2023-05-27 15:30:00'),
+    (108320, 583, 'Tropical delight', 'https://instagram.com/p/yz0', 'Cardiff', '2023-05-28 13:25:00'),
+    (108101, 697, 'Pistachio Orange love', 'https://instagram.com/p/234', 'Belfast', '2023-05-29 18:40:00');
+INSERT INTO Comments (comment_id, user_id, post_id, comment, time_created)
 VALUES
-  (1, 506, 110601, CURRENT_TIMESTAMP),
-  (2, 507, 110602, CURRENT_TIMESTAMP),
-  (3, 508, 110603, CURRENT_TIMESTAMP),
-  (4, 509, 110604, CURRENT_TIMESTAMP),
-  (5, 501, 110605, CURRENT_TIMESTAMP);
-  
--- into data into comments table
-
-INSERT INTO comments (comment_id, user_id, post_id, comment_text, created_at)
+    (1, 531, 106872, 'Yum!', '2023-05-20 11:00:00'),
+    (2, 562, 106625, 'Cant wait to try it!', '2023-05-21 14:50:00'),
+    (3, 620, 107993, 'Love the combination of flavors', '2023-05-22 09:25:00'),
+    (4, 674, 106749, 'Refreshing indeed!', '2023-05-23 17:30:00'),
+    (5, 691, 107785, 'Smoothie goals!', '2023-05-24 12:15:00'),
+    (6, 596, 108020, 'Perfect for a healthy lifestyle', '2023-05-25 16:10:00'),
+    (7, 666, 107240, 'How does it taste?', '2023-05-26 11:55:00'),
+    (8, 571, 107671, 'Freshness in every sip', '2023-05-27 15:35:00'),
+    (9, 583, 108320, 'Happiness in a glass!', '2023-05-28 13:30:00'),
+    (10, 697, 108101, 'Reminds me of a tropical getaway', '2023-05-29 13:30:00');
+INSERT INTO Likes (like_id, user_id, post_id, post_likes, time_created)
 VALUES
-  (2110601, 502, 110601, 'Looks delicious!', CURRENT_TIMESTAMP),
-  (2110602, 503, 110601, 'I need to try this!', CURRENT_TIMESTAMP),
-  (2110603, 504, 110602, 'Perfect way to start the day!', CURRENT_TIMESTAMP),
-  (2110604, 505, 110602, 'Love the color!', CURRENT_TIMESTAMP),
-  (2110605, 506, 110610, 'Great flavor combination!', CURRENT_TIMESTAMP),
-  (2110606, 507, 110610, 'I am dubious about the taste', CURRENT_TIMESTAMP),
-  (2110607, 508, 110607, 'Refreshing!', CURRENT_TIMESTAMP),
-  (2110608, 509, 110604, 'I want one now!', CURRENT_TIMESTAMP),
-  (2110609, 510, 110605, 'Beautiful photo!', CURRENT_TIMESTAMP);
-  
-
--- Insert data into Hashtags table
-INSERT INTO Hashtags (hashtag_id, hashtag_name)
+    (1, 531, 106872, 56, '2023-05-20 10:40:00'),
+    (2, 562, 106872, 32, '2023-05-20 11:30:00'),
+    (3, 620, 106625, 78, '2023-05-21 14:55:00'),
+    (4, 674, 107993, 43, '2023-05-22 09:30:00'),
+    (5, 691, 107785, 67, '2023-05-23 17:35:00'),
+    (6, 596, 108020, 91, '2023-05-24 12:20:00'),
+    (7, 666, 107240, 52, '2023-05-25 16:15:00'),
+    (8, 571, 107671, 42, '2023-05-26 12:00:00'),
+    (9, 583, 108320, 75, '2023-05-27 15:40:00'),
+    (10, 697, 108101, 27, '2023-05-28 13:35:00');
+INSERT INTO Hashtags (hashtag_id, hashtag)
 VALUES
-  (1, '#smoothielove'),
-  (2, '#healthychoices'),
-  (3, '#pistaccioorange'),
-  (4, '#refreshing'),
-  (5, '#smoothiebowl'),
-  (6, '#fruitful'),
-  (7, '#summerdrinks'),
-  (8, '#nuttygoodness'),
-  (9, '#juiceitup'),
-  (10, '#tropicalvibes');
-
--- Insert data into Shares table
-INSERT INTO Shares (share_id, post_id, user_id, share_date)
+    (1, '#pistachioorange'),
+    (2, '#smoothielove'),
+    (3, '#healthychoices'),
+    (4, '#summerrefreshment'),
+    (5, '#tropicalflavors'),
+    (6, '#deliciousdrinks'),
+    (7, '#wellnessjourney'),
+    (8, '#energizing'),
+    (9, '#fruitygoodness'),
+    (10, '#healthyliving');
+INSERT INTO Shares (share_id, post_id, user_id, post_shares, share_date, reach)
 VALUES
-  (1, 1, 101, '2023-05-10 09:30:00'),
-  (2, 2, 102, '2023-05-12 15:45:00'),
-  (3, 3, 103, '2023-05-15 11:20:00'),
-  (4, 4, 104, '2023-05-18 17:55:00'),
-  (5, 5, 105, '2023-05-21 08:10:00'),
-  (6, 6, 106, '2023-05-24 14:30:00'),
-  (7, 7, 107, '2023-05-27 10:45:00'),
-  (8, 8, 108, '2023-05-30 16:20:00'),
-  (9, 9, 109, '2023-06-02 12:35:00'),
-  (10, 10, 110, '2023-06-05 09:50:00');
-
--- Insert data into SentimentAnalysis table
-INSERT INTO SentimentAnalysis (analysis_id, post_id, sentiment_score, analysis_date)
+    (1, 106872, 531, 28, '2023-05-20 12:00:00', 145),
+    (2, 106625, 562, 12, '2023-05-21 15:00:00', 76),
+    (3, 107993, 620, 35, '2023-05-22 09:40:00', 198),
+    (4, 106749, 674, 18, '2023-05-23 17:50:00', 103),
+    (5, 107785, 691, 22, '2023-05-24 12:30:00', 120),
+    (6, 108020, 596, 40, '2023-05-25 16:20:00', 215),
+    (7, 107240, 666, 17, '2023-05-26 12:10:00', 96),
+    (8, 107671, 571, 19, '2023-05-27 15:50:00', 110),
+    (9, 108320, 583, 32, '2023-05-28 13:40:00', 178),
+    (10, 108101, 697, 9, '2023-05-29 19:00:00', 58);
+INSERT INTO SentimentAnalysis (comment_id, sentiment_score)
 VALUES
-  (1, 1, 0.85, '2023-05-10 10:00:00'),
-  (2, 2, 0.92, '2023-05-12 16:00:00'),
-  (3, 3, 0.78, '2023-05-15 12:00:00'),
-  (4, 4, 0.64, '2023-05-18 18:00:00'),
-  (5, 5, 0.88, '2023-05-21 08:30:00'),
-  (6, 6, 0.76, '2023-05-24 14:45:00'),
-  (7, 7, 0.91, '2023-05-27 11:00:00'),
-  (8, 8, 0.82, '2023-05-30 16:30:00'),
-  (9, 9, 0.73, '2023-06-02 12:45:00'),
-  (10, 10, 0.62, '2023-06-07 1:45:00');
-  
--- Insert data into CampaignPerformance table
-INSERT INTO CampaignPerformance (campaign_id, campaign_name, start_date, end_date, engagement_rate, reach)
+    (1, 1),
+    (2, 1),
+    (3, 1),
+    (4, 1),
+    (5, 1),
+    (6, 1),
+    (7, 0),
+    (8, 1),
+    (9, 1),
+    (10, 1);
+INSERT INTO Impressions (impression_id, post_id, user_id, impression_date, impressions_total)
 VALUES
-  (1, 'Pistachio Orange', '2023-05-01', '2023-05-31', 0.12, 25000),
-  (2, 'Citrus Burst', '2023-06-01', '2023-06-30', 0.11, 28000),
-  (3, 'Nutty Delight', '2023-07-01', '2023-07-31', 0.15, 32000),
-  (4, 'Orange Dream', '2023-08-01', '2023-08-31', 0.13, 27000),
-  (5, 'Tropical Fusion', '2023-09-01', '2023-09-30', 0.09, 19000),
-  (6, 'Creamy Pistachio', '2023-10-01', '2023-10-31', 0.14, 30000),
-  (7, 'Zesty Orange', '2023-11-01', '2023-11-30', 0.11, 25000),
-  (8, 'Nutty Citrus', '2023-12-01', '2023-12-31', 0.13, 28000),
-  (9, 'Refreshing Twist', '2024-01-01', '2024-01-31', 0.12, 26000),
-  (10, 'Creamsicle Surprise', '2024-02-01', '2024-02-29', 0.1, 23000);
-
+    (1, 106872, 531, '2023-06-01 10:30:00', 500),
+    (2, 106625, 562, '2023-06-01 11:15:00', 750),
+    (3, 107993, 620, '2023-06-01 13:45:00', 1000),
+    (4, 106749, 674, '2023-06-01 15:20:00', 900),
+    (5, 107785, 691, '2023-06-02 09:00:00', 1200),
+    (6, 108020, 596, '2023-06-02 11:30:00', 800),
+    (7, 107240, 666, '2023-06-02 14:15:00', 1100),
+    (8, 107671, 571, '2023-06-03 09:45:00', 950),
+    (9, 108320, 583, '2023-06-03 12:00:00', 700),
+    (10, 108101, 697, '2023-06-03 15:30:00', 850);
