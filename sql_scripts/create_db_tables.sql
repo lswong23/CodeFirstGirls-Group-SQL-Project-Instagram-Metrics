@@ -183,29 +183,46 @@ JOIN comments c ON p.post_id = c.post_id;
 Select *
 FROM post_details;
 
+-- This view combines data from the "Posts," "Likes," "Comments," "Shares," and "Impressions" tables. It calculates various engagement metrics for each post, including the number of likes, comments, shares, and impressions.
+CREATE VIEW PostEngagement AS
+SELECT p.post_id, p.caption, p.time_created, COUNT(DISTINCT l.user_id) AS likes_count, COUNT(DISTINCT c.comment_id) AS comments_count, COUNT(DISTINCT s.share_id) AS shares_count, COUNT(DISTINCT i.impression_id) AS impressions_count
+FROM Posts AS p
+LEFT JOIN Likes AS l ON p.post_id = l.post_id
+LEFT JOIN Comments AS c ON p.post_id = c.post_id
+LEFT JOIN Shares AS s ON p.post_id = s.post_id
+LEFT JOIN Impressions AS i ON p.post_id = i.post_id
+GROUP BY p.post_id, p.caption, p.time_created;
 
+Select *
+FROM PostEngagement;
 
--- creating a stored function that calculates Total Engagement for a Post. This function calculates the total engagement (likes + comments) for a given post ID.
-SET GLOBAL log_bin_trust_function_creators = 1;
+-- Stored Function: GetPostEngagement. This stored function takes a post ID as input and returns the total number of unique users who have engaged with the post (through likes, comments, shares, or impressions). The marketing manager can use this function to retrieve the engagement count for a specific post without writing multiple queries.
 
 DELIMITER //
 
-CREATE FUNCTION GetSentimentLabel(sentimentScore INT) RETURNS VARCHAR(255)
+CREATE FUNCTION GetPostEngagement(postID INT) RETURNS INT
 BEGIN
-    DECLARE sentimentLabel VARCHAR(255);
+    DECLARE engagementCount INT;
     
-    IF sentimentScore >= 0.7 THEN
-        SET sentimentLabel = 'Positive';
-    ELSEIF sentimentScore <= 0.3 THEN
-        SET sentimentLabel = 'Negative';
-    ELSE
-        SET sentimentLabel = 'Neutral';
-    END IF;
+    SET engagementCount = (
+        SELECT COUNT(DISTINCT user_id)
+        FROM (
+            SELECT user_id FROM Likes WHERE post_id = postID
+            UNION ALL
+            SELECT user_id FROM Comments WHERE post_id = postID
+            UNION ALL
+            SELECT user_id FROM Shares WHERE post_id = postID
+            UNION ALL
+            SELECT user_id FROM Impressions WHERE post_id = postID
+        ) AS engagement
+    );
     
-    RETURN sentimentLabel;
-END //
+    RETURN engagementCount;
+END//
 
 DELIMITER ;
+
+SELECT GetPostEngagement(531) AS engagementCount;
 
 
 -- Create a query with a subquery that retrieves all posts with their respective comments
