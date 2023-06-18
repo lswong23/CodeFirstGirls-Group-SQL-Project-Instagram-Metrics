@@ -47,6 +47,4 @@ The stored function was created to take a post ID as input and returns the total
 We have created queries (with sub-queries) to allow the marketing manager to find posts with the highest number of likes and their corresponding usernames.
 
 ## Triggers
-We have created a very simple trigger to allow the marketing manager to view an automated updated record in the PostEngagement (named 'UpdateMarketingRecord') to be executed when an insert operation is performed on the Likes table. For each row that is inserted, the trigger executes the UPDATE statement to increment the likes_count column in the PostEngagement view for the corresponding post_id.
-
-By using this trigger, whenever a new like is inserted into the Likes table, the marketing manager's record in the PostEngagement view will be automatically updated to reflect the increased number of likes for the relevant post.
+We have created a very simple trigger to allow the marketing manager to view an automated updated record in the PostEngagement (named 'UpdateMarketingRecord') to be executed when an insert operation is performed on the Likes table. For each row that is inserted (i.e., when someone like a post), the trigger executes the UPDATE statement to increment the likes_count column in the PostEngagement view for the corresponding post_id.
