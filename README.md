@@ -7,8 +7,8 @@ The purpose of this project is to help a marketing manager understand the produc
 ## Table of Contents
 - TBC: [Database Schema](#database-schema)
 - [SQL Scripts](#sql-scripts)
-	1. [Tables] (#tables)
-	2. [Join] (#join)
+	1. [Tables](#tables)
+	2. [Join](#join)
 	3. [Views](#views)
 	4. [Stored Procedures](#stored-procedures)
 	5. [Queries](#example-queries)
