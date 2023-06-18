@@ -42,7 +42,7 @@ We have created a join of these two tables: comments  with sentimentalanalysis t
 2. View #2: The view was created to allow the marketing manager to easily access a comprehensive overview of post engagement metrics in a single query. This information can help in monitoring the performance of posts, identifying popular content, and making data-driven decisions to optimize the social media marketing strategy.
 
 ## Stored Procedures
-The stored function was created that calculates Total Engagement for a Post. This function calculates the total engagement (likes + comments) for a given post ID.
+The stored function was created to take a post ID as input and returns the total number of unique users who have engaged with the post (through likes, comments, shares, or impressions). The marketing manager can use this function to retrieve the engagement count for a specific post without writing multiple queries.
 
 ## Queries
 We have created queries (with sub-queries) to allow the marketing manager to find posts with the highest number of likes and their corresponding usernames.
