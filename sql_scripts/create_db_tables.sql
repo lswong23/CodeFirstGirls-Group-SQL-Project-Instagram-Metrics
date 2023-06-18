@@ -1,6 +1,6 @@
 CREATE DATABASE newsmoothie;
 
-USE NEWSMOOTHIE;
+USE newsmoothie;
 
 CREATE TABLE Users (
     user_id INT PRIMARY KEY,
