@@ -11,9 +11,8 @@ The purpose of this project is to help a marketing manager understand the produc
 	2. [Join](#join)
 	3. [Views](#views)
 	4. [Stored Procedures](#stored-procedures)
-	5. [Queries](#example-queries)
-	6. [Events](#events)
-	7. [Triggers](#triggers) 
+	5. [Queries](#queries)
+	6. [Triggers](#triggers) 
 
 ## Database Schema
 The database schema consists of 8 tables representing different entities in an Instagram-like application, such as users, posts, comments, likes, and followers. The schema design ensures proper relationships between the tables using primary and foreign keys.
@@ -47,7 +46,7 @@ The stored function was created to take a post ID as input and returns the total
 ## Queries
 We have created queries (with sub-queries) to allow the marketing manager to find posts with the highest number of likes and their corresponding usernames.
 
-## Events
-
 ## Triggers
+We have created a very simple trigger to allow the marketing manager to view an automated updated record in the PostEngagement (named 'UpdateMarketingRecord') to be executed when an insert operation is performed on the Likes table. For each row that is inserted, the trigger executes the UPDATE statement to increment the likes_count column in the PostEngagement view for the corresponding post_id.
 
+By using this trigger, whenever a new like is inserted into the Likes table, the marketing manager's record in the PostEngagement view will be automatically updated to reflect the increased number of likes for the relevant post.
