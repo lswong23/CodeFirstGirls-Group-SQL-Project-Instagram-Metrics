@@ -15,7 +15,7 @@ The purpose of this project is to help a marketing manager understand the produc
 	6. [Triggers](#triggers) 
 
 ## Database Schema
-The database schema consists of 8 tables representing different entities in an Instagram-like application, such as users, posts, comments, likes, and followers. The schema design ensures proper relationships between the tables using primary and foreign keys. See (./cfg project model.png/)
+The database schema consists of 8 tables representing different entities in an Instagram-like application, such as users, posts, comments, likes, and followers. The schema design ensures proper relationships between the tables using primary and foreign keys. See [Database Schema](./cfg_gp44_dbstructure.png/).
 
 ## SQL Scripts
 The SQL scripts directory contains various scripts for creating the database schema, tables, and constraints. It also includes scripts for populating initial data if required. The scripts are organized as follows:
