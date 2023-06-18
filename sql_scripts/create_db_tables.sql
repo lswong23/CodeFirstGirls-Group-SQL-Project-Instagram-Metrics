@@ -233,3 +233,24 @@ SELECT p.post_id, p.caption, (
     WHERE c.post_id = p.post_id
 ) AS comment_count
 FROM posts p;
+
+-- -- create triggers after someone likes a post, then the PostEngagement view will be updated for the marketing manager. The code include check to see if the trigger works.
+
+
+CREATE TRIGGER UpdateMarketingRecord
+AFTER INSERT ON Likes
+FOR EACH ROW
+    UPDATE PostEngagement
+    SET likes_count = likes_count + New.post_likes
+    WHERE post_id = NEW.post_id;
+
+Select *
+FROM likes;
+
+    -- Inserting a new like
+    INSERT INTO Likes (like_id, user_id, post_id, post_likes, time_created)
+    VALUES (11, 620, 106872, 1, '2023-06-04 09:00:00');
+
+    -- Checking the updated PostEngagement record
+    SELECT *
+    FROM PostEngagement;
