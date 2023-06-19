@@ -252,3 +252,54 @@ FOR EACH ROW
     -- Checking the updated PostEngagement record
     SELECT *
     FROM PostEngagement;
+
+ DROP TRIGGER IF EXISTS UpdateMarketingRecord;
+
+
+ -- Find the posts that have reached the highest number of users:
+    
+SELECT p.post_id, p.caption
+FROM Posts p
+WHERE p.post_id IN (
+    SELECT s.post_id
+    FROM Shares s
+    ORDER BY reach DESC
+);
+
+
+-- Calculate the engagement rate per user (likes + comments per post):
+
+SELECT u.username, ((COUNT(DISTINCT l.like_id) + COUNT(DISTINCT c.comment_id)) / COUNT(DISTINCT p.post_id)) AS engagement_rate
+FROM Users u
+JOIN Posts p ON u.user_id = p.user_id
+LEFT JOIN Likes l ON p.post_id = l.post_id
+LEFT JOIN Comments c ON p.post_id = c.post_id
+GROUP BY u.username;
+
+
+
+-- Identify the posts with the highest engagement rate (likes + comments) in descending order
+
+SELECT p.post_id,p.caption, (COUNT(DISTINCT l.like_id) + COUNT(DISTINCT c.comment_id)) AS total_engagement
+FROM Posts p
+LEFT JOIN Likes l ON p.post_id = l.post_id
+LEFT JOIN Comments c ON p.post_id = c.post_id
+GROUP BY p.post_id
+ORDER BY total_engagement DESC;
+
+-- Identify the username of the person who shared a particular post 
+SELECT u.username
+FROM Users u
+JOIN Shares s ON u.user_id = s.user_id
+WHERE s.post_id = 107993;
+
+
+
+-- Subquery to find the users who have not received any likes on their posts:
+
+SELECT u.username, p.post_id, l.post_likes
+FROM Users u
+LEFT JOIN Posts p ON u.user_id = p.user_id
+LEFT JOIN Likes l ON p.post_id = l.post_id
+WHERE l.post_id IS NULL;
+
