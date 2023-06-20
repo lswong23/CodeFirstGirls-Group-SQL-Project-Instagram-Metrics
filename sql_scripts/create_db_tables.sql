@@ -201,6 +201,7 @@ FROM PostEngagement;
 DELIMITER //
 
 CREATE FUNCTION GetPostEngagement(postID INT) RETURNS INT
+READS SQL DATA
 BEGIN
     DECLARE engagementCount INT;
     
@@ -233,27 +234,6 @@ SELECT p.post_id, p.caption, (
     WHERE c.post_id = p.post_id
 ) AS comment_count
 FROM posts p;
-
-
--- -- create triggers after someone likes a post, then the PostEngagement view will be updated for the marketing manager. The code include check to see if the trigger works.
-
-CREATE TRIGGER UpdateMarketingRecord
-AFTER INSERT ON Likes
-FOR EACH ROW
-    UPDATE PostEngagement
-    SET likes_count = likes_count + New.post_likes
-    WHERE post_id = NEW.post_id;
-
-
-    -- Inserting a new like
-    INSERT INTO Likes (like_id, user_id, post_id, post_likes, time_created)
-    VALUES (11, 620, 106872, 1, '2023-06-04 09:00:00');
-
-    -- Checking the updated PostEngagement record
-    SELECT *
-    FROM PostEngagement;
-
- DROP TRIGGER IF EXISTS UpdateMarketingRecord;
 
 
  -- Find the posts that have reached the highest number of users:
@@ -302,4 +282,27 @@ FROM Users u
 LEFT JOIN Posts p ON u.user_id = p.user_id
 LEFT JOIN Likes l ON p.post_id = l.post_id
 WHERE l.post_id IS NULL;
+
+
+-- Create a trigger that updates a separate table called MarketingMetrics whenever a new post is inserted into the Posts table. This trigger calculates and stores the total number of posts for each user:
+-- Create the MarketingMetrics table
+CREATE TABLE IF NOT EXISTS MarketingMetrics (
+    user_id INT PRIMARY KEY,
+    total_posts INT
+);
+
+-- Create the trigger
+CREATE TRIGGER UpdateMarketingMetrics
+AFTER INSERT ON Posts
+FOR EACH ROW
+    -- Update the total_posts count for the user in MarketingMetrics
+    INSERT INTO MarketingMetrics (user_id, total_posts)
+    VALUES (NEW.user_id, 1)
+    ON DUPLICATE KEY UPDATE total_posts = total_posts + 1;
+    ----
+INSERT INTO Posts (post_id, user_id, caption, post_url, location, time_created)
+VALUES (123456, 531, 'Hello world!', 'https://instagram.com/p/xyz', 'London', '2023-06-10 14:00:00');
+--
+SELECT *
+FROM MarketingMetrics;
 
