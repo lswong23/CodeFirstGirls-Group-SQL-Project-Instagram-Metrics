@@ -2,7 +2,7 @@
 This is the final project that forms part of the CodeFirstGirls Data & SQL course presented as a group project. This repository contains the SQL project for analysing data from an Instagram-like social media platform. The project involves creating a relational database, writing SQL queries, and implementing advanced features such as stored procedures, triggers and views.
 
 ## Project name: Instragram Metrics
-The purpose of this project is to help a marketing manager understand the product marketing effort of a new product (Pistachio Smoothie) through analysis of an Instagram-like social media platform using SQL.  The data will allow the marketing manager to understand user engagements, sentiment and hastag analysis, reach and impressions and user behaviour.
+The purpose of this project is to help a marketing manager understand the product marketing effort of a new flavour  (Pistachio Orange Smoothie) through analysis of an Instagram-like social media platform using SQL.  The data will allow the marketing manager to understand user engagements, sentiment and hastag analysis, reach and impressions and user behaviour.
 
 ## Table of Contents
 - [Database Schema](#database-schema)
@@ -15,7 +15,7 @@ The purpose of this project is to help a marketing manager understand the produc
 	6. [Triggers](#triggers) 
 
 ## Database Schema
-The database schema consists of 8 tables representing different entities in an Instagram-like application, such as users, posts, comments, likes, and followers. The schema design ensures proper relationships between the tables using primary and foreign keys. See [Database Schema](./cfg_gp44_dbstructure.png/).
+The database schema consists of 8 tables representing different entities in an Instagram-like application, such as users, posts, comments, likes, and shares etc. The schema design ensures proper relationships between the tables using primary and foreign keys. See [Database Schema](./cfg_gp44_dbstructure.png/).
 
 ## SQL Scripts
 The SQL scripts include code for creating the database schema, tables, and constraints. For more details, refer to the [SQL scripts](./sql_scripts/) directory.
