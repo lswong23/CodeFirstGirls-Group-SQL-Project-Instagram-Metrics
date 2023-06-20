@@ -42,7 +42,13 @@ We have created a join of these two tables: comments  with sentimentalanalysis t
 The stored function was created to take a post ID as input and returns the total number of unique users who have engaged with the post (through likes, comments, shares, or impressions). The marketing manager can use this function to retrieve the engagement count for a specific post without writing multiple queries.
 
 ## Queries
-We have created queries (with sub-queries) to allow the marketing manager to find posts with the highest number of likes and their corresponding usernames.
+1. We have created query to allow the marketing manager to find posts with the highest number of likes and their corresponding usernames.
+2. The second query retrieves all posts along with the count of comments for each post, providing the marketing manager with an overview of the engagement level on each post.
+3. The third query helps the marketing manager identify the posts that have reached the highest number of users, allowing them to analyse the effectiveness of content distribution strategies.
+4. The fourth query calculates the engagement rate per user by considering the total number of likes and comments per post, enabling the marketing manager to evaluate the level of user interaction and identify highly engaged users.
+5. The fifth query identifies the posts with the highest engagement rate (combined likes and comments) in descending order, assisting the marketing manager in understanding the most popular and engaging content.
+6. The sixth query allows the marketing manager to find the username of the person who shared a particular post, which can be useful for tracking influencers or understanding the reach of shared content.
+7. The seventh query uses a subquery to find users who have not received any likes on their posts, helping the marketing manager identify users who may need additional support or engagement to improve their content performance.
 
 ## Triggers
-We have created a very simple trigger to allow the marketing manager to view an automated updated record in the PostEngagement view (named 'UpdateMarketingRecord') to be executed when an insert operation is performed on the Likes table. For each row that is inserted (i.e., when someone like a post), the trigger executes the UPDATE statement to increment the likes_count column in the PostEngagement view for the corresponding post_id.
+We have created a trigger that updates a separate table called MarketingMetrics whenever a new post is inserted into the Posts table. This trigger calculates and stores the total number of posts for each user. It helps the marketing manager track the total number of posts made by each user without manually updating the count, providing valuable insights into user engagement and content creation patterns.
