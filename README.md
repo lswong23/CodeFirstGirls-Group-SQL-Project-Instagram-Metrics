@@ -1,4 +1,4 @@
-# CFG_SQL_project
+# CFG_SQL_project- IG Smoothie Campaign
 This is the final project that forms part of the CodeFirstGirls Data & SQL course presented as a group project. This repository contains the SQL project for analyzing data from an Instagram-like social media platform. The project involves creating a relational database, writing SQL queries, and implementing advanced features such as stored procedures, triggers, and views. Please note that there are areas of improvements including 
 
 ## Project name: Instragram Metrics
