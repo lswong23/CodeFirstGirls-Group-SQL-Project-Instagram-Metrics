@@ -10,7 +10,7 @@ The purpose of this project is to help a marketing manager understand product ma
 	1. [Tables](#tables)
 	2. [Join](#join)
 	3. [Views](#views)
-	4. [Stored Procedures](#stored-procedures)
+	4. [Stored Function](#stored-function)
 	5. [Queries](#queries)
 	6. [Triggers](#triggers)
 - [Future Work](#future-work)
