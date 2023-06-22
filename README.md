@@ -1,5 +1,5 @@
 # CFG_SQL_project
-This is the final project that forms part of the CodeFirstGirls Data & SQL course presented as a group project. This repository contains the SQL project for analysing data from an Instagram-like social media platform. The project involves creating a relational database, writing SQL queries, and implementing advanced features such as stored procedures, triggers and views.
+This is the final project that forms part of the CodeFirstGirls Data & SQL course presented as a group project. This repository contains the SQL project for analyzing data from an Instagram-like social media platform. The project involves creating a relational database, writing SQL queries, and implementing advanced features such as stored procedures, triggers, and views. Please note that there are areas of improvements including 
 
 ## Project name: Instragram Metrics
 The purpose of this project is to help a marketing manager understand the product marketing effort of a new flavour  (Pistachio Orange Smoothie) through analysis of an Instagram-like social media platform using SQL.  The data will allow the marketing manager to understand user engagements, sentiment and hastag analysis, reach and impressions and user behaviour.
@@ -52,3 +52,8 @@ The stored function was created to take a post ID as input and returns the total
 
 ## Triggers
 We have created a trigger that updates a separate table called MarketingMetrics whenever a new post is inserted into the Posts table. This trigger calculates and stores the total number of posts for each user. It helps the marketing manager track the total number of posts made by each user without manually updating the count, providing valuable insights into user engagement and content creation patterns.
+
+## Future Work
+As part of future improvements to this project, we can work closely with the marketing manager to identify their needs to better tailor the database design. Suggested improvement include optimising the database structure and design , for example, by incorporating foreign key relationships to ensure data integrity and improve query performance. Additionally, some of the queries can be simplified to enhance the overall functionality and efficiency of the project for the marketing manager. This will help our team to build a better data model for a more user-friendly reporting and visualisation.
+
+
