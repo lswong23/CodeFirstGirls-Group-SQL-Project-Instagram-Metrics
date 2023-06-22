@@ -1,7 +1,7 @@
 # CFG_SQL_project- IG Smoothie Campaign
 This is the final project that forms part of the CodeFirstGirls Data & SQL course presented as a group project. This repository contains the SQL project for analyzing data from an Instagram-like social media platform. The project involves creating a relational database, writing SQL queries, and implementing advanced features such as stored procedures, triggers, and views. Please note that there are areas of improvements including 
 
-## Project name: Instragram Metrics
+## Project name: Instragram Metrics- IG Smoothie Campaign
 The purpose of this project is to help a marketing manager understand product marketing campaign for a new flavor called "Pistachio Orange Smoothie". This is achieved through using SQL analysis of a social media platform similar to Instagram. By examining the data, the marketing manager will gain insights into user engagements, sentiment analysis, hashtag trends, reach and impressions, as well as user behavior patterns.
 
 ## Table of Contents
