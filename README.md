@@ -2,7 +2,7 @@
 This is the final project that forms part of the CodeFirstGirls Data & SQL course presented as a group project. This repository contains the SQL project for analyzing data from an Instagram-like social media platform. The project involves creating a relational database, writing SQL queries, and implementing advanced features such as stored procedures, triggers, and views. Please note that there are areas of improvements including 
 
 ## Project name: Instragram Metrics
-The purpose of this project is to help a marketing manager understand the product marketing effort of a new flavour  (Pistachio Orange Smoothie) through analysis of an Instagram-like social media platform using SQL.  The data will allow the marketing manager to understand user engagements, sentiment and hastag analysis, reach and impressions and user behaviour.
+The purpose of this project is to help a marketing manager understand product marketing campaign for a new flavor called "Pistachio Orange Smoothie". This is achieved through using SQL analysis of a social media platform similar to Instagram. By examining the data, the marketing manager will gain insights into user engagements, sentiment analysis, hashtag trends, reach and impressions, as well as user behavior patterns.
 
 ## Table of Contents
 - [Database Schema](#database-schema)
@@ -12,7 +12,8 @@ The purpose of this project is to help a marketing manager understand the produc
 	3. [Views](#views)
 	4. [Stored Procedures](#stored-procedures)
 	5. [Queries](#queries)
-	6. [Triggers](#triggers) 
+	6. [Triggers](#triggers)
+-[Future Improvements](#future_improvements)
 
 ## Database Schema
 The database schema consists of 8 tables representing different entities in an Instagram-like application, such as users, posts, comments, likes, hashtags, sentiment analysis, shares and impressions. The schema design ensures proper relationships between the tables using primary and foreign keys. See [Database Schema](./cfg_gp44_dbstructure.png/).
